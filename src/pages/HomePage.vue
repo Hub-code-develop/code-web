@@ -29,6 +29,9 @@ import { site } from '@/content/site'
             <a class="btn btn--ghost" href="https://discord.gg/QcbCCZBxtN" target="_blank" rel="noopener">
               加入 Discord
             </a>
+            <a class="btn btn--ghost" href="https://hub-develop.top/" target="_blank" rel="noopener">
+              Hub-develop 主页
+            </a>
           </div>
         </div>
       </div>
