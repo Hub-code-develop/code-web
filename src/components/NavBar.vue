@@ -25,7 +25,7 @@ watch(
   <header class="nav" :class="{ 'nav--scrolled': scrolled, 'nav--open': open }">
     <div class="container nav__inner">
       <RouterLink class="nav__brand" to="/" aria-label="返回首页">
-        <span class="nav__logo">{{ site.brand.short }}</span>
+        <img class="nav__logo" src="/logo.png" alt="" />
         <span class="nav__name">{{ site.brand.name }}</span>
       </RouterLink>
 
@@ -92,15 +92,13 @@ watch(
   letter-spacing: -0.02em;
 }
 .nav__logo {
-  display: grid;
-  place-items: center;
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: var(--ink);
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 800;
+  object-fit: contain;
+  padding: 4px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
 }
 .nav__links {
   display: flex;
