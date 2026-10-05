@@ -25,10 +25,33 @@ const h = site.hero
         </ul>
 
         <div class="hero__actions">
-          <RouterLink class="btn btn--primary" :to="h.primaryCta.to">
+          <RouterLink v-if="h.primaryCta.to" class="btn btn--primary" :to="h.primaryCta.to">
             {{ h.primaryCta.label }}
           </RouterLink>
-          <RouterLink class="btn btn--ghost" :to="h.secondaryCta.to">
+          <a
+            v-else-if="h.primaryCta.href"
+            class="btn btn--primary"
+            :href="h.primaryCta.href"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ h.primaryCta.label }}
+          </a>
+
+          <a
+            v-if="h.secondaryCta.href"
+            class="btn btn--ghost"
+            :href="h.secondaryCta.href"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ h.secondaryCta.label }}
+          </a>
+          <RouterLink
+            v-else-if="h.secondaryCta.to"
+            class="btn btn--ghost"
+            :to="h.secondaryCta.to"
+          >
             {{ h.secondaryCta.label }}
           </RouterLink>
         </div>

@@ -24,4 +24,4 @@ cd MChub
 
 - 阅读 [架构总览](/docs/architecture) 了解整体设计
 - 查看 [贡献指南](/docs/contributing) 参与进来
-- 回到 [项目列表](/projects) 挑选感兴趣的方向
+- 在 [GitHub 组织](https://github.com/Hub-code-develop) 浏览全部仓库，挑选感兴趣的方向

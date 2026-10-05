@@ -1,71 +1,32 @@
 <script setup lang="ts">
 import Hero from '@/components/Hero.vue'
-import ProjectCard from '@/components/ProjectCard.vue'
-import { site, featuredProjects } from '@/content/site'
-import { renderRich } from '@/utils/rich'
-
-const about = site.about
+import LanguageStats from '@/components/LanguageStats.vue'
+import { site } from '@/content/site'
 </script>
 
 <template>
   <div>
     <Hero />
 
-    <!-- 精选项目 -->
-    <section class="section">
-      <div class="container">
-        <div class="head" v-reveal>
-          <div class="section-head">
-            <p class="section-kicker">// featured</p>
-            <h2 class="section-title">精选项目</h2>
-            <p class="lead">我们正在积极开发与维护的部分项目。</p>
-          </div>
-          <RouterLink class="link-arrow head__more" to="/projects">全部项目</RouterLink>
-        </div>
-        <div class="grid">
-          <ProjectCard v-for="p in featuredProjects" :key="p.slug" :project="p" />
-        </div>
-      </div>
-    </section>
+    <!-- 语言使用状态 -->
+    <LanguageStats />
 
-    <!-- 关于预览 -->
-    <section class="section section--soft">
-      <div class="container">
-        <div class="section-head" v-reveal>
-          <p class="section-kicker">// about</p>
-          <h2 class="section-title">关于 {{ site.brand.name }}</h2>
-          <p class="lead" v-html="renderRich(about.lead)"></p>
-        </div>
-
-        <div class="caps">
-          <article v-for="c in about.capabilities" :key="c.idx" class="card cap" v-reveal>
-            <span class="cap__idx">{{ c.idx }}</span>
-            <h3 class="cap__title">{{ c.title }}</h3>
-            <p class="cap__stack">{{ c.stack }}</p>
-            <p class="cap__desc">{{ c.desc }}</p>
-          </article>
-        </div>
-
-        <div class="more" v-reveal>
-          <RouterLink class="btn btn--ghost" to="/about">了解更多</RouterLink>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
+    <!-- GitHub 链接 CTA -->
     <section class="section">
       <div class="container">
         <div class="cta" v-reveal>
           <div>
-            <p class="section-kicker">// get in touch</p>
-            <h2 class="section-title">想一起做点什么？</h2>
-            <p class="lead">无论是反馈问题、交流技术，还是加入协作，都欢迎找到我们。</p>
+            <p class="section-kicker">// source</p>
+            <h2 class="section-title">全部代码都在 GitHub</h2>
+            <p class="lead">
+              我们所有的项目、SDK 与文档源都以开源形式托管在 GitHub 组织下，随时欢迎查看与贡献。
+            </p>
           </div>
           <div class="cta__actions">
-            <RouterLink class="btn btn--primary" to="/contact">联系我们</RouterLink>
-            <a class="btn btn--ghost" :href="site.brand.repo" target="_blank" rel="noopener">
-              在 GitHub 关注
+            <a class="btn btn--primary" :href="site.brand.repo" target="_blank" rel="noopener">
+              在 GitHub 查看组织
             </a>
+            <RouterLink class="btn btn--ghost" to="/docs">阅读文档</RouterLink>
           </div>
         </div>
       </div>
@@ -74,58 +35,6 @@ const about = site.about
 </template>
 
 <style scoped>
-.head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1.4rem;
-  flex-wrap: wrap;
-}
-.head__more {
-  margin-bottom: 0.3rem;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-  gap: 1.1rem;
-  margin-top: 2.6rem;
-}
-
-.caps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1rem;
-  margin-top: 2.6rem;
-}
-.cap {
-  padding: 1.5rem 1.4rem;
-}
-.cap__idx {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--accent-ink);
-}
-.cap__title {
-  font-size: 1.12rem;
-  font-weight: 750;
-  margin-top: 0.7rem;
-  letter-spacing: -0.01em;
-}
-.cap__stack {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-top: 0.25rem;
-}
-.cap__desc {
-  color: var(--ink-soft);
-  font-size: 0.92rem;
-  margin-top: 0.7rem;
-}
-.more {
-  margin-top: 2.2rem;
-}
-
 .cta {
   display: flex;
   align-items: center;

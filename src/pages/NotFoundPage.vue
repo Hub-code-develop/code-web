@@ -18,7 +18,7 @@ const route = useRoute()
 
       <div class="nf__actions">
         <RouterLink class="btn btn--primary" to="/">回到首页</RouterLink>
-        <RouterLink class="btn btn--ghost" to="/projects">看看项目</RouterLink>
+        <RouterLink class="btn btn--ghost" to="/docs">读文档</RouterLink>
       </div>
     </div>
   </div>

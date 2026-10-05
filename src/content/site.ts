@@ -3,18 +3,16 @@
  * 开发者门户 + 文档中心（code.hub-develop.top）
  * ------------------------------------------------------------
  * 网站的每一句可见文案、每一个链接，都从这里读取。
- * 想改站上的内容？只改这个文件（以及同目录的 projects.ts）就够了。
+ * 想改站上的内容？只改这个文件（以及同目录的 languages.ts）就够了。
  *
  *   site.brand      品牌名 / 链接 / 邮箱
  *   site.nav        顶部导航 + 页脚导航
  *   site.hero       首页大标题区（含终端窗口）
- *   site.about      关于（首页预览 + /about 详情页）
- *   site.contact    /contact 联系页
  *   site.footer     页脚（深色大字标区）
  *   site.seo        各页面 <title> / 描述
  * ============================================================ */
 
-import { projects, featuredProjects } from './projects'
+import { languageMeta } from './languages'
 
 export interface NavItem {
   label: string
@@ -28,30 +26,10 @@ export interface SocialItem {
   mark: string
 }
 
-export interface Capability {
-  idx: string
-  title: string
-  stack: string
-  desc: string
-}
-
-export interface Principle {
-  idx: string
-  title: string
-  desc: string
-}
-
-export interface StatItem {
-  value: string
+export interface Cta {
   label: string
-}
-
-export interface ContactChannel {
-  label: string
-  value: string
-  href: string
-  desc: string
-  mark: string
+  to?: string
+  href?: string
 }
 
 /* ---------------------------------------------------------- */
@@ -62,27 +40,24 @@ const brand = {
   /** 导航栏 / 页脚的小 logo 文字 */
   short: 'Hub',
   tagline: '开发者门户与文档中心',
-  description: 'Hub-develop 的开发者门户与文档中心：项目、SDK、API 与贡献指南，一应俱全。',
+  description: 'Hub-develop 的开发者门户与文档中心：文档、SDK、API 与贡献指南，一应俱全。',
   /** 展示用的域名文本 */
   domain: 'code.hub-develop.top',
-  /** 组织 GitHub 地址 */
-  repo: 'https://github.com/Hub-develop',
-  /** 上游 / 母组织名（终端窗口与联系卡会用到，必须定义，否则显示为空） */
+  /** 组织 GitHub 地址（真实组织为 Hub-code-develop） */
+  repo: 'https://github.com/Hub-code-develop',
+  /** 上游 / 母组织名（终端窗口会用到） */
   org: 'Hub-develop',
-  orgUrl: 'https://github.com/Hub-develop',
+  orgUrl: 'https://github.com/Hub-code-develop',
   /** 联系邮箱 */
   email: '',
 }
 
 /* ---------------------------------------------------------- */
-/*  导航                                                       */
+/*  导航（精简：仅保留首页与文档，项目/关于/联系已移除）        */
 /* ---------------------------------------------------------- */
 const nav: NavItem[] = [
   { label: '首页', to: '/' },
-  { label: '项目', to: '/projects' },
   { label: '文档', to: '/docs' },
-  { label: '关于', to: '/about' },
-  { label: '联系', to: '/contact' },
 ]
 
 const socials: SocialItem[] = [
@@ -97,19 +72,11 @@ const hero = {
   kicker: 'Hub-develop 的开发者门户与文档中心',
   term: { user: 'guest', host: 'code', cmd: 'whoami' },
   title: brand.name,
-  subtitle: '项目、文档与贡献指南，集中在一处。',
-  lead: '这里汇集 Hub-develop 旗下所有代码项目的概览、上手文档与 API 参考。无论你想快速接入、阅读源码，还是参与贡献，都能在这里找到入口。',
-  tags: [
-    '跨平台',
-    '.NET / Avalonia',
-    'Flutter',
-    'Spring Boot',
-    'Docker',
-    'TypeScript',
-    'ChromiumOS',
-  ],
-  primaryCta: { label: '浏览核心项目', to: '/projects' },
-  secondaryCta: { label: '阅读文档', to: '/docs' },
+  subtitle: '语言概览、文档与贡献指南，集中在一处。',
+  lead: '这里汇总 Hub-develop 旗下所有代码项目使用的语言与文档。无论你想快速接入、阅读源码，还是参与贡献，都能在这里找到入口。',
+  tags: ['C# / .NET', 'Avalonia', 'TypeScript', 'Vue', 'Python', 'Docker'],
+  primaryCta: { label: '阅读文档', to: '/docs' } as Cta,
+  secondaryCta: { label: '在 GitHub 查看', href: brand.repo } as Cta,
   /** Hero 右侧的模拟终端窗口 */
   terminal: {
     title: 'code — zsh',
@@ -117,120 +84,9 @@ const hero = {
     rows: [
       { key: 'org', value: brand.name, kind: 'val' as const },
       { key: 'role', value: 'developer portal', kind: 'val' as const },
-      { key: 'projects', value: `${projects.length} public`, kind: 'num' as const },
+      { key: 'langs', value: `${languageMeta.languageCount} in use`, kind: 'num' as const },
       { key: 'docs', value: 'available at /docs', kind: 'ok' as const },
-      { key: 'status', value: '● building', kind: 'ok' as const },
-    ],
-  },
-}
-
-/* ---------------------------------------------------------- */
-/*  关于                                                       */
-/* ---------------------------------------------------------- */
-const about = {
-  kicker: '// about',
-  title: '关于 Hub-develop',
-  /** 首页预览段落（可含 **强调**，由组件按需渲染） */
-  lead: 'Hub-develop 是 **CodeHub 的上游组织**，定位于底层能力与研究。我们把通用、可复用的工程能力沉淀在这里，再以更产品化的形态在 CodeHub 下对外发布。',
-  /** /about 详情页的正文段落 */
-  story: [
-    'Hub-develop 是 CodeHub 的上游组织，也是这些项目「最早被写下」的地方。',
-    '我们相信好的工具应该先被自己用起来：跨平台的桌面启动器、一键部署的服务端、可复用的文档框架、以及从源码出发的操作系统探索——它们都源于真实的使用需求，而不是为了做而做。',
-    '在这里，通用的、底层的、可复用的能力被沉淀成项目；打磨成熟之后，再以更产品化的形态在 CodeHub 组织下发布给更多人。',
-    '我们不追求项目数量，只在乎每一件是否真的解决了问题。功能必须真实可用——这是我们最在意的一条底线。',
-  ],
-  capabilities: [
-    {
-      idx: '01',
-      title: '跨平台桌面',
-      stack: '.NET · Avalonia',
-      desc: '以原生一致的体验，打造真正好用的桌面应用。',
-    },
-    {
-      idx: '02',
-      title: '服务端与容器',
-      stack: 'Spring Boot · Docker',
-      desc: '无 UI 启动器 + 网页控制面板，一键拉起与部署。',
-    },
-    {
-      idx: '03',
-      title: '文档与框架',
-      stack: 'MD3 · TypeScript',
-      desc: '可复用、可定制的文档框架，跨项目无缝互通。',
-    },
-    {
-      idx: '04',
-      title: '操作系统',
-      stack: 'ChromiumOS',
-      desc: '从底层出发，探索更开放、更可控的系统形态。',
-    },
-  ] as Capability[],
-  principles: [
-    {
-      idx: '01',
-      title: '真实优先',
-      desc: '拒绝占位数据与静默失败。依赖缺失就硬报错，功能不通就不上线。',
-    },
-    {
-      idx: '02',
-      title: '可复用',
-      desc: '通用能力下沉到上游，一次沉淀、多项目复用，避免重复造轮子。',
-    },
-    {
-      idx: '03',
-      title: '开放可控',
-      desc: '偏好从源码出发，掌握每一层的来龙去脉，而不是依赖封装的黑盒。',
-    },
-    {
-      idx: '04',
-      title: '长期主义',
-      desc: '不做一次性项目。维护、迭代与打磨，和「做出来」同样重要。',
-    },
-  ] as Principle[],
-  /** 关于页的统计（数据来自真实配置，非手填） */
-  stats: [
-    { value: String(projects.length), label: '核心项目' },
-    { value: '04', label: '专注方向' },
-    { value: String(socials.length), label: '联系渠道' },
-  ] as StatItem[],
-}
-
-/* ---------------------------------------------------------- */
-/*  联系                                                       */
-/* ---------------------------------------------------------- */
-const contact = {
-  kicker: '// contact',
-  title: '联系我们',
-  lead: '想交流技术、反馈问题，或者一起做点什么？下面任意一条路都能找到我们。',
-  channels: [
-    {
-      label: 'GitHub 组织',
-      value: '@Hub-develop',
-      href: brand.repo,
-      desc: '提交 Issue、查看源码、参与讨论的主阵地。',
-      mark: 'GH',
-    },
-    {
-      label: '电子邮箱',
-      value: brand.email,
-      href: `mailto:${brand.email}`,
-      desc: '合作、投稿或不便公开的反馈，欢迎邮件联系。',
-      mark: '@',
-    },
-    {
-      label: '上游组织',
-      value: brand.org,
-      href: brand.orgUrl,
-      desc: '我们沉淀的上游能力，也会以产品化形态在此发布。',
-      mark: 'CH',
-    },
-  ] as ContactChannel[],
-  join: {
-    title: '如何参与',
-    steps: [
-      { idx: '01', title: '逛逛项目', desc: '在「项目」页了解我们正在做什么，挑一个你感兴趣的。' },
-      { idx: '02', title: '提个 Issue', desc: '发现 Bug 或有想法，直接在对应仓库提 Issue 是最快的方式。' },
-      { idx: '03', title: '发起讨论', desc: '想深入聊，可以通过邮箱说明你的想法与背景。' },
+      { key: 'status', value: '● live', kind: 'ok' as const },
     ],
   },
 }
@@ -255,21 +111,9 @@ const seo = {
     title: `${brand.name} · ${brand.tagline}`,
     description: brand.description,
   },
-  projects: {
-    title: `核心项目 · ${brand.name}`,
-    description: 'Hub-develop 正在开发与维护的开源项目：跨平台桌面、服务端、文档框架与操作系统。',
-  },
   docs: {
     title: `文档 · ${brand.name}`,
     description: 'Hub-develop 项目文档：快速开始、贡献指南与架构总览。',
-  },
-  about: {
-    title: `关于 · ${brand.name}`,
-    description: about.lead.replace(/\*\*/g, ''),
-  },
-  contact: {
-    title: `联系 · ${brand.name}`,
-    description: '通过 GitHub、邮箱或上游组织，与 Hub-develop 取得联系。',
   },
   notFound: {
     title: `页面走丢了 · ${brand.name}`,
@@ -285,11 +129,6 @@ export const site = {
   nav,
   socials,
   hero,
-  about,
-  contact,
   footer,
   seo,
 }
-
-export { projects, featuredProjects }
-export type { Project, ProjectStatus, ProjectLink } from './projects'
