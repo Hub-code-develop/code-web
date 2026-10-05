@@ -25,12 +25,12 @@
   --bg: #ffffff;
   --bg-soft: #f7f8fa;
 
-  /* 强调色 */
-  --accent: #6366f1;
-  --accent-ink: #4f46e5;
-  --accent-soft: rgba(99, 102, 241, 0.1);
-  --emerald-soft: rgba(16, 185, 129, 0.12);
-  --emerald-ink: #059669;
+  /* 强调色 —— 提取自 Hub.code.png 图标主色 */
+  --accent: #1da072;
+  --accent-ink: #157f5a;
+  --accent-soft: rgba(29, 160, 114, 0.1);
+  --emerald-soft: rgba(29, 160, 114, 0.12);
+  --emerald-ink: #157f5a;
   --amber-soft: rgba(245, 158, 11, 0.14);
   --amber-ink: #b45309;
   --rose-soft: rgba(244, 63, 94, 0.12);
@@ -175,12 +175,12 @@ strong {
   white-space: nowrap;
 }
 .btn--primary {
-  background: var(--ink);
+  background: var(--accent);
   color: #fff;
 }
 .btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 26px rgba(11, 11, 15, 0.22);
+  box-shadow: 0 12px 26px rgba(21, 127, 90, 0.35);
 }
 .btn--ghost {
   background: #fff;
@@ -188,7 +188,8 @@ strong {
   border-color: var(--line-strong);
 }
 .btn--ghost:hover {
-  border-color: var(--ink);
+  border-color: var(--accent);
+  color: var(--accent);
   transform: translateY(-2px);
 }
 .btn--sm {

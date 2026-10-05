@@ -44,6 +44,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .btt:hover {
   transform: translateY(-3px);
   box-shadow: 0 16px 34px rgba(11, 11, 15, 0.34);
+  background: var(--accent);
 }
 .btt:focus-visible {
   outline: 2px solid var(--accent);

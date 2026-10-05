@@ -66,11 +66,11 @@ const f = site.footer
   inset: auto 0 -34% 0;
   height: 78%;
   z-index: -1;
-  background: radial-gradient(closest-side, rgba(99, 102, 241, 0.55), transparent 70%) 28% 82% /
+  background: radial-gradient(closest-side, rgba(29, 160, 114, 0.55), transparent 70%) 28% 82% /
       52% 92% no-repeat,
-    radial-gradient(closest-side, rgba(168, 85, 247, 0.42), transparent 70%) 58% 92% / 56% 82%
+    radial-gradient(closest-side, rgba(16, 185, 129, 0.42), transparent 70%) 58% 92% / 56% 82%
       no-repeat,
-    radial-gradient(closest-side, rgba(56, 189, 248, 0.34), transparent 70%) 82% 68% / 46% 72%
+    radial-gradient(closest-side, rgba(52, 211, 153, 0.34), transparent 70%) 82% 68% / 46% 72%
       no-repeat;
   filter: blur(28px);
   opacity: 0.8;
@@ -94,7 +94,7 @@ const f = site.footer
   margin-bottom: 0.4rem;
 }
 .foot__prompt .prompt__user {
-  color: #a5b4fc;
+  color: #6ee7b7;
 }
 .foot__prompt .prompt__path {
   color: var(--dark-ink);

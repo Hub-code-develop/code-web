@@ -97,8 +97,8 @@ watch(
   border-radius: 10px;
   object-fit: contain;
   padding: 4px;
-  background: var(--bg-soft);
-  border: 1px solid var(--line);
+  background: rgba(29, 160, 114, 0.06);
+  border: 1px solid rgba(29, 160, 114, 0.35);
 }
 .nav__links {
   display: flex;
@@ -115,12 +115,12 @@ watch(
   transition: background 0.18s ease, color 0.18s ease;
 }
 .nav__links a:hover {
-  color: var(--ink);
+  color: var(--accent);
 }
 .nav__links a.router-link-active {
-  background: var(--bg-soft);
-  border: 1px solid var(--line);
-  color: var(--ink);
+  background: var(--accent-soft);
+  border: 1px solid rgba(29, 160, 114, 0.25);
+  color: var(--accent-ink);
 }
 .nav__gh {
   margin-left: auto;
@@ -166,7 +166,8 @@ watch(
   border-bottom: 1px solid var(--line);
 }
 .nav__mobile a.router-link-active {
-  color: var(--accent-ink);
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 .menu-enter-active,
 .menu-leave-active {

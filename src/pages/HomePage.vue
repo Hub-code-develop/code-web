@@ -46,10 +46,10 @@ import { site } from '@/content/site'
   justify-content: space-between;
   gap: 2rem;
   flex-wrap: wrap;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(29, 160, 114, 0.22);
   border-radius: var(--radius);
   padding: 2.4rem 2.2rem;
-  background: var(--bg-soft);
+  background: linear-gradient(135deg, rgba(29, 160, 114, 0.06), var(--bg-soft));
 }
 .cta__actions {
   display: flex;
