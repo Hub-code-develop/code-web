@@ -18,7 +18,7 @@ const route = useRoute()
 
       <div class="nf__actions">
         <RouterLink class="btn btn--primary" to="/">回到首页</RouterLink>
-        <RouterLink class="btn btn--ghost" to="/docs">读文档</RouterLink>
+        <a class="btn btn--ghost" :href="'https://github.com/Hub-code-develop'" target="_blank" rel="noopener">去 GitHub</a>
       </div>
     </div>
   </div>

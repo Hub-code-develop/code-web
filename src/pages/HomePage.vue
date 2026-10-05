@@ -19,14 +19,13 @@ import { site } from '@/content/site'
             <p class="section-kicker">// source</p>
             <h2 class="section-title">全部代码都在 GitHub</h2>
             <p class="lead">
-              我们所有的项目、SDK 与文档源都以开源形式托管在 GitHub 组织下，随时欢迎查看与贡献。
+              我们所有的项目与 SDK 都以开源形式托管在 GitHub 组织下，随时欢迎查看与贡献。
             </p>
           </div>
           <div class="cta__actions">
             <a class="btn btn--primary" :href="site.brand.repo" target="_blank" rel="noopener">
               在 GitHub 查看组织
             </a>
-            <RouterLink class="btn btn--ghost" to="/docs">阅读文档</RouterLink>
           </div>
         </div>
       </div>

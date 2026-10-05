@@ -9,19 +9,6 @@ const routes: RouteRecordRaw[] = [
     meta: { title: site.seo.home.title, description: site.seo.home.description },
   },
   {
-    path: '/docs',
-    name: 'docs',
-    component: () => import('@/pages/DocsPage.vue'),
-    meta: { title: site.seo.docs.title, description: site.seo.docs.description },
-  },
-  {
-    path: '/docs/:slug',
-    name: 'doc',
-    component: () => import('@/pages/DocPage.vue'),
-    props: true,
-    meta: { title: `文档 · ${site.brand.name}` },
-  },
-  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/pages/NotFoundPage.vue'),

@@ -39,7 +39,7 @@ const h = site.hero
           </a>
 
           <a
-            v-if="h.secondaryCta.href"
+            v-if="h.secondaryCta?.href"
             class="btn btn--ghost"
             :href="h.secondaryCta.href"
             target="_blank"
@@ -48,7 +48,7 @@ const h = site.hero
             {{ h.secondaryCta.label }}
           </a>
           <RouterLink
-            v-else-if="h.secondaryCta.to"
+            v-else-if="h.secondaryCta?.to"
             class="btn btn--ghost"
             :to="h.secondaryCta.to"
           >
