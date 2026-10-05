@@ -1,15 +1,10 @@
 /* ============================================================
- * Hub-develop · 站点内容总配置（唯一内容来源）
- * 开发者门户（code.hub-develop.top）
+ * Code.Hub · 站点内容总配置（唯一内容来源）
+ * 社区门户（code.hub-develop.top）
  * ------------------------------------------------------------
- * 网站的每一句可见文案、每一个链接，都从这里读取。
- * 想改站上的内容？只改这个文件（以及同目录的 languages.ts）就够了。
- *
- *   site.brand      品牌名 / 链接 / 邮箱
- *   site.nav        顶部导航 + 页脚导航
- *   site.hero       首页大标题区（含终端窗口）
- *   site.footer     页脚
- *   site.seo        各页面 <title> / 描述
+ * 所有可见文案均取自组织 Profile README：
+ *   https://github.com/Hub-code-develop/.github/blob/main/profile/README.md
+ * 想改站上的文字？只改这个文件（以及同目录的 languages.ts）就够了。
  * ============================================================ */
 
 import { languageMeta } from './languages'
@@ -33,53 +28,55 @@ export interface Cta {
 }
 
 /* ---------------------------------------------------------- */
-/*  品牌                                                       */
+/*  品牌（社区名来自 README：Code.Hub）                        */
 /* ---------------------------------------------------------- */
 const brand = {
-  name: 'Hub-develop',
+  name: 'Code.Hub',
   /** 导航栏 / 页脚的小 logo 文字 */
   short: 'Hub',
-  tagline: '开发者门户',
-  description: 'Hub-develop 的开发者门户：语言概览与开源项目，集中在一处。',
+  tagline: 'Connect user and PC (or AI)',
+  description: 'Code.Hub 社区门户 —— Hub 系列应用、Minecraft 与各类开源小工具的聚集地。',
   /** 展示用的域名文本 */
   domain: 'code.hub-develop.top',
-  /** 组织 GitHub 地址（真实组织为 Hub-code-develop） */
+  /** 组织 GitHub 地址（代码实际所在组织 Hub-code-develop） */
   repo: 'https://github.com/Hub-code-develop',
-  /** 上游 / 母组织名（终端窗口会用到） */
-  org: 'Hub-develop',
+  /** 上游 / 母组织名 */
+  org: 'Hub-code-develop',
   orgUrl: 'https://github.com/Hub-code-develop',
   /** 联系邮箱 */
   email: '',
 }
 
 /* ---------------------------------------------------------- */
-/*  导航（仅首页；文档/项目/关于/联系均已移除）                */
+/*  导航（仅首页）                                            */
 /* ---------------------------------------------------------- */
 const nav: NavItem[] = [{ label: '首页', to: '/' }]
 
 const socials: SocialItem[] = [
   { label: 'GitHub', href: brand.repo, mark: 'GH' },
-  { label: '组织', href: brand.orgUrl, mark: 'CH' },
+  { label: 'Discord', href: 'https://discord.gg/QcbCCZBxtN', mark: 'DC' },
 ]
 
 /* ---------------------------------------------------------- */
-/*  首页 Hero                                                  */
+/*  首页 Hero（文案取自 README）                              */
 /* ---------------------------------------------------------- */
 const hero = {
-  kicker: 'Hub-develop 的开发者门户',
+  kicker: 'Code.Hub · 社区门户',
   term: { user: 'guest', host: 'code', cmd: 'whoami' },
   title: brand.name,
-  subtitle: '我们都在用什么语言造东西，一图看清。',
-  lead: '这里汇总 Hub-develop 旗下所有代码项目使用的语言与占比。无论你想快速接入、阅读源码，还是参与贡献，都能在这里找到入口。',
+  subtitle: 'Hub, Connect user and PC (or AI).',
+  lead: '欢迎来到 Code.Hub —— 由 Hub-develop 的社区用户与官方开发者共同组建的组织。我们在这里一起制作有趣的 Hub 系列应用、Minecraft 内容，以及其他小工具。',
   tags: ['C# / .NET', 'Avalonia', 'TypeScript', 'Vue', 'Python', 'Docker'],
   primaryCta: { label: '在 GitHub 查看', href: brand.repo } as Cta,
+  /** 次按钮：社区 Discord（README 中的加入入口） */
+  secondaryCta: { label: '加入 Discord', href: 'https://discord.gg/QcbCCZBxtN' } as Cta,
   /** Hero 右侧的模拟终端窗口 */
   terminal: {
     title: 'code — zsh',
-    cmd: '$ hub-develop --portal',
+    cmd: '$ codehub --portal',
     rows: [
       { key: 'org', value: brand.name, kind: 'val' as const },
-      { key: 'role', value: 'developer portal', kind: 'val' as const },
+      { key: 'role', value: 'community portal', kind: 'val' as const },
       { key: 'langs', value: `${languageMeta.languageCount} in use`, kind: 'num' as const },
       { key: 'portal', value: 'online', kind: 'ok' as const },
       { key: 'status', value: '● live', kind: 'ok' as const },
@@ -94,7 +91,7 @@ const footer = {
   term: { user: 'guest', host: 'code', cmd: 'cat footer.txt' },
   /** 巨大的字标（会随屏幕缩放） */
   wordmark: brand.name,
-  note: '以开源之名构建。',
+  note: 'Connect user and PC (or AI).',
   /** 版权行里给组织名加下划线链接 */
   copyrightName: brand.name,
 }
@@ -104,7 +101,7 @@ const footer = {
 /* ---------------------------------------------------------- */
 const seo = {
   home: {
-    title: `${brand.name} · ${brand.tagline}`,
+    title: `${brand.name} · 社区门户`,
     description: brand.description,
   },
   notFound: {

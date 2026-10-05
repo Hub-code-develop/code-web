@@ -11,20 +11,23 @@ import { site } from '@/content/site'
     <!-- 语言使用状态 -->
     <LanguageStats />
 
-    <!-- GitHub 链接 CTA -->
+    <!-- 社区入口（来自 README 的加入邀请） -->
     <section class="section">
       <div class="container">
         <div class="cta" v-reveal>
           <div>
-            <p class="section-kicker">// source</p>
-            <h2 class="section-title">全部代码都在 GitHub</h2>
+            <p class="section-kicker">// community</p>
+            <h2 class="section-title">一起做点有趣的东西</h2>
             <p class="lead">
-              我们所有的项目与 SDK 都以开源形式托管在 GitHub 组织下，随时欢迎查看与贡献。
+              我们欢迎更多社区创作者加入 —— 在组织的 Discussions 或 Discord 申请，审核通过即可加入交流群。
             </p>
           </div>
           <div class="cta__actions">
             <a class="btn btn--primary" :href="site.brand.repo" target="_blank" rel="noopener">
-              在 GitHub 查看组织
+              在 GitHub 查看
+            </a>
+            <a class="btn btn--ghost" href="https://discord.gg/QcbCCZBxtN" target="_blank" rel="noopener">
+              加入 Discord
             </a>
           </div>
         </div>
