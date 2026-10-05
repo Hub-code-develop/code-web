@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Hub-develop 开发者门户与文档中心 —— 跨平台桌面、服务端、文档框架与操作系统的开源工程能力，项目、SDK、API 与贡献指南一应俱全。"
+    />
+    <title>Hub-develop · 开发者门户与文档</title>
+    <!-- GitHub Pages SPA 回退：把 404.html 存下的深链接还原回来 -->
+    <script>
+      ;(function () {
+        var redirect = sessionStorage.getItem('redirect')
+        if (redirect) {
+          sessionStorage.removeItem('redirect')
+          if (redirect !== location.href) {
+            history.replaceState(null, null, redirect)
+          }
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

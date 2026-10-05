@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hub-develop</title>
+    <script>
+      /* GitHub Pages 对任意未匹配路径都会返回这个 404 页面。
+         自定义域 code.hub-develop.top 下站点位于根路径 /，
+         我们把原始深链接存进 sessionStorage，再跳回根，
+         由 index.html 读出来并 restore 成真实路径（SPA fallback）。 */
+      ;(function () {
+        var l = window.location
+        try {
+          sessionStorage.setItem('redirect', l.href)
+        } catch (e) {}
+        l.replace(l.origin + '/')
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>
