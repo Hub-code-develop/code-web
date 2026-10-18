@@ -18,21 +18,21 @@ let rafId: number | null = null
 
 function paint() {
   if (!railInner.value || !rail.value || !section.value) return
-  // 窄屏用原生横向滚动，不做视差位移
+  const vh = window.innerHeight
+  // 窄屏：原生横滑，不固定页面
   if (window.innerWidth < 768) {
+    section.value.style.height = ''
     railInner.value.style.transform = 'translateX(0)'
     return
   }
   const max = Math.max(0, railInner.value.scrollWidth - rail.value.clientWidth)
+  // 让 section 提供与横向位移 1:1 的「滚动跑道」：钉住期间滚动 max 像素，轨道正好走完
+  section.value.style.height = `${vh + max}px`
   const rect = section.value.getBoundingClientRect()
-  const vh = window.innerHeight
-  // 视差窗口：section 顶部从「刚进入视口底部」(rect.top=vh) 到「接近视口顶部」
-  // (rect.top≈0.2vh) 的过程中，轨道从起点平移到终点。这样当 section 仍舒适可见时，
-  // 所有卡片就已完整显示，之后继续滚动轨道保持静止，不再提前截断内容（页脚始终可达）。
-  const start = vh
-  const end = vh * 0.2
-  let p = Math.min(1, Math.max(0, (start - rect.top) / (start - end)))
-  p = p * p * (3 - 2 * p) // smoothstep 缓动：起步/收尾更柔和，避免生硬线性
+  // 仅在 section 被钉住（rect.top ≤ 0）之后才开始横向滑动，避免「提前滑动」
+  const scrolled = Math.min(max, Math.max(0, -rect.top))
+  let p = max > 0 ? scrolled / max : 0
+  p = p * p * (3 - 2 * p) // smoothstep：起止更柔和
   railInner.value.style.transform = `translateX(${-p * max}px)`
 }
 
@@ -62,41 +62,43 @@ function close() {
 
 <template>
   <section ref="section" class="rail-section">
-    <div class="container">
-      <div class="rail-head">
-        <div>
-          <p v-if="kicker" class="section-kicker">{{ kicker }}</p>
-          <h2 v-if="title" class="section-title">{{ title }}</h2>
+    <div class="rail-sticky">
+      <div class="container">
+        <div class="rail-head">
+          <div>
+            <p v-if="kicker" class="section-kicker">{{ kicker }}</p>
+            <h2 v-if="title" class="section-title">{{ title }}</h2>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div ref="rail" class="rail">
-      <div ref="railInner" class="rail-inner">
-        <button
-          v-for="l in languages"
-          :key="l.lang"
-          class="lcard"
-          :style="{ '--theme': l.color }"
-          type="button"
-          @click="open(l)"
-        >
-          <div class="lcard__top">
-            <span class="lcard__rank">#{{ l.rank }}</span>
-            <span class="lcard__dot" :style="{ background: l.color }"></span>
-          </div>
-          <h3 class="lcard__name">{{ l.lang }}</h3>
-          <p class="lcard__pct">{{ l.pct }}%</p>
-          <span class="lcard__bar">
-            <span class="lcard__fill" :style="{ width: l.pct + '%', background: l.color }"></span>
-          </span>
-          <p class="lcard__repo">{{ l.repos.length }} 个仓库 · 查看 →</p>
-        </button>
+      <div ref="rail" class="rail">
+        <div ref="railInner" class="rail-inner">
+          <button
+            v-for="l in languages"
+            :key="l.lang"
+            class="lcard"
+            :style="{ '--theme': l.color }"
+            type="button"
+            @click="open(l)"
+          >
+            <div class="lcard__top">
+              <span class="lcard__rank">#{{ l.rank }}</span>
+              <span class="lcard__dot" :style="{ background: l.color }"></span>
+            </div>
+            <h3 class="lcard__name">{{ l.lang }}</h3>
+            <p class="lcard__pct">{{ l.pct }}%</p>
+            <span class="lcard__bar">
+              <span class="lcard__fill" :style="{ width: l.pct + '%', background: l.color }"></span>
+            </span>
+            <p class="lcard__repo">{{ l.repos.length }} 个仓库 · 查看 →</p>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="container">
-      <p class="rail-hint">横向滑动 / 滚动浏览全部语言 · 点击卡片查看详情</p>
+      <div class="container">
+        <p class="rail-hint">横向滑动 / 滚动浏览全部语言 · 点击卡片查看详情</p>
+      </div>
     </div>
 
     <LanguageModal v-if="selected" :language="selected" @dismiss="close" />
@@ -105,10 +107,20 @@ function close() {
 
 <style scoped>
 .rail-section {
-  padding: 1rem 0 3rem;
+  position: relative; /* 高度由 JS 设为 vh + max，提供横向滑动的滚动跑道 */
+}
+.rail-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  overflow: hidden;
 }
 .rail-head {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 .rail-head .section-title {
   margin-top: 0.4rem;
@@ -205,7 +217,7 @@ function close() {
 }
 
 .rail-hint {
-  margin-top: 1.4rem;
+  margin-top: 0;
   font-size: 0.85rem;
   color: var(--muted);
 }
