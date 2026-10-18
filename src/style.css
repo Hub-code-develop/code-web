@@ -14,23 +14,23 @@
 }
 
 :root {
-  /* 文字与线 */
-  --ink: #0b0b0f;
-  --ink-soft: #41414c;
-  --muted: #6b7280;
-  --line: #e6e8ec;
-  --line-strong: #d3d7de;
+  /* 文字与线（深色主题） */
+  --ink: #ededed;
+  --ink-soft: #c7ccd6;
+  --muted: #8b90a3;
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.18);
 
-  /* 底色 */
-  --bg: #ffffff;
-  --bg-soft: #f7f8fa;
+  /* 底色（深色主题） */
+  --bg: #0a0b10;
+  --bg-soft: #12141d;
 
-  /* 强调色 —— 提取自 Hub.code.png 图标主色 */
-  --accent: #1da072;
-  --accent-ink: #157f5a;
-  --accent-soft: rgba(29, 160, 114, 0.1);
-  --emerald-soft: rgba(29, 160, 114, 0.12);
-  --emerald-ink: #157f5a;
+  /* 强调色 —— 提取自 Hub.code.png 图标主色（深色下提亮） */
+  --accent: #2bbd86;
+  --accent-ink: #6ee7b7;
+  --accent-soft: rgba(43, 189, 134, 0.16);
+  --emerald-soft: rgba(43, 189, 134, 0.14);
+  --emerald-ink: #34d399;
   --amber-soft: rgba(245, 158, 11, 0.14);
   --amber-ink: #b45309;
   --rose-soft: rgba(244, 63, 94, 0.12);
@@ -152,8 +152,8 @@ strong {
 
 /* ---------- grid background ---------- */
 .grid-bg {
-  background-image: linear-gradient(to right, rgba(15, 23, 42, 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
   background-size: 46px 46px;
   -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 55%, transparent 100%);
   mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 55%, transparent 100%);
@@ -183,13 +183,13 @@ strong {
   box-shadow: 0 12px 26px rgba(21, 127, 90, 0.35);
 }
 .btn--ghost {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.04);
   color: var(--ink);
   border-color: var(--line-strong);
 }
 .btn--ghost:hover {
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-ink);
   transform: translateY(-2px);
 }
 .btn--sm {
@@ -260,7 +260,7 @@ strong {
 
 /* ---------- cards ---------- */
 .card {
-  background: #fff;
+  background: var(--bg-soft);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;

@@ -74,7 +74,7 @@ watch(
 }
 .nav--scrolled,
 .nav--open {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(10, 11, 16, 0.82);
   backdrop-filter: saturate(180%) blur(14px);
   border-bottom-color: var(--line);
 }
@@ -119,7 +119,7 @@ watch(
 }
 .nav__links a.router-link-active {
   background: var(--accent-soft);
-  border: 1px solid rgba(29, 160, 114, 0.25);
+  border: 1px solid rgba(43, 189, 134, 0.3);
   color: var(--accent-ink);
 }
 .nav__gh {
